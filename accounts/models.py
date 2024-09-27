@@ -33,6 +33,15 @@ class Student(AbstractBaseUser):
         return self.name
 
 
+class StudentProfile(models.Model):
+    user = models.OneToOneField(Student, on_delete=models.CASCADE, related_name='student_profile')
+    date_of_birth = models.DateField(null=True, blank=True)
+    address = models.TextField(blank=True)
+    phone_number = models.CharField(max_length=15, blank=True)
+
+    def __str__(self):
+        return f"Profile of {self.user.reg_number}"
+
 class Course(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     course_name = models.CharField(max_length=100)
@@ -57,3 +66,10 @@ class ExaminationResult(models.Model):
 
     def __str__(self):
         return f"{self.student.name} - {self.course.course_name} - {self.score}"
+
+
+@receiver(post_save, sender=Student)
+def create_or_update_student_profile(sender, instance, created):
+    if created:
+            StudentProfile.objects.create(user=instance)
+    instance.student_profile.save()
