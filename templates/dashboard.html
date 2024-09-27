@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Student portal{% endblock title %}
+
+{% block content %}
+<main class="bg-white">
+    <div class="">
+        <section class="bg-rose-50 p-4">
+            <h2>{{profile.name}}</h2>
+            <p>{{profile.email}}</p>
+        </section>
+    </div>
+</main>
+{% endblock content %}
