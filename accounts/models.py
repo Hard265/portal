@@ -36,7 +36,7 @@ class Student(AbstractBaseUser, PermissionsMixin):
 
 
 class StudentProfile(models.Model):
-    user = models.OneToOneField(Student, on_delete=models.CASCADE, related_name='profile')
+    user = models.OneToOneField(Student, on_delete=models.CASCADE, related_name='student_profile')
     name = models.CharField(max_length=100, blank=True)
     email = models.EmailField(blank=True, null=True)
     date_of_birth = models.DateField(null=True, blank=True)

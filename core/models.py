@@ -17,7 +17,7 @@ class TuitionFee(models.Model):
 
 
 class Course(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    student = models.ManyToManyField(Student, related_name='courses')
     course_name = models.CharField(max_length=100)
 
     def __str__(self):
