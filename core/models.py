@@ -3,6 +3,14 @@ from django.db import models
 
 from accounts.models import Student
 
+class Programme(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    code = models.CharField(max_length=10, unique=True)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"{self.name} ({self.code})"
+
 class TuitionFee(models.Model):
     student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='tuition_fees')
     amount = models.DecimalField(max_digits=10, decimal_places=2)
